@@ -28,15 +28,10 @@ def makedirs(path):
 
 
 def calculate_class_metrics(pred: list, label: list):
-    # 整体识别率
     overall_accuracy = np.round(accuracy_score(label, pred), 4)
-
-    # 获取所有类别
     unique_classes = np.unique(label)
     class_accuracies = {}
     class_confusion_matrices = np.zeros((len(unique_classes), len(unique_classes)))
-
-    # 逐类别计算识别率和混淆矩阵
     for cls in unique_classes:
         cls_indices = np.where(np.array(label) == cls)[0]
         cls_correct = np.sum(np.array(pred)[cls_indices] == cls)
